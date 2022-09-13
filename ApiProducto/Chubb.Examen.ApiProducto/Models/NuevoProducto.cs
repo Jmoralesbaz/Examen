@@ -10,7 +10,7 @@ namespace Chubb.Examen.ApiProducto.Models
         public string nombre { get; set; }
         public string descripcion { get; set; }
         public string categoria { get; set; }
-        public double precio { get; set; }
-        public int unidades { get; set; }
+        public string precio { get; set; }
+        public string unidades { get; set; }
     }
 }

@@ -27,10 +27,10 @@ namespace Chubb.Examen.ApiProducto
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy("AllowOrigin", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-            //});
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigin", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            });
             services.AddSingleton<List<Producto>>(new List<Producto>());
         }
 
@@ -43,7 +43,7 @@ namespace Chubb.Examen.ApiProducto
             }
 
             app.UseHttpsRedirection();
-            //app.UseCors("AllowOrigin");
+            app.UseCors("AllowOrigin");
             app.UseRouting();
 
             app.UseAuthorization();

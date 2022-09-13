@@ -58,7 +58,7 @@ namespace Chubb.Examen.ApiProducto.Controllers
         {
             int i = 0;
             var p = convertir(nuevo);
-            if (p.precio == 0 || string.IsNullOrEmpty(p.categoria) || string.IsNullOrEmpty(p.descripcion))
+            if (p.precio == "0" || string.IsNullOrEmpty(p.categoria) || string.IsNullOrEmpty(p.descripcion))
             {
                 return StatusCode(400, new Error { codigo = 400, mensaje = $"Por favor revisa el valor de Precio({p.precio}), Categoria({p.categoria}), Descripcion({p.descripcion}) estos no pueden ir vacios o en 0" });
             }
@@ -108,19 +108,19 @@ namespace Chubb.Examen.ApiProducto.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public IActionResult update(int id,NuevoProducto nuevo)
         {
-            if (data.Where(w => w.id == id).ToList().Count == 0)
+            if (data.Where(w => w.id == id ).ToList().Count == 0)
             {
                 return StatusCode(404, new Error { codigo = 400, mensaje = $"El valor del id({id}) no existe, verificalo porfavor" });
             }
             else
             {
                 var p = convertir(nuevo);
-                if (data.Where(w => w.nombre.Trim().ToLower() == p.nombre.Trim().ToLower()).ToList().Count > 0)
+                if (data.Where(w => w.id != id && w.nombre.Trim().ToLower() == p.nombre.Trim().ToLower()).ToList().Count > 0)
                 {
                     return StatusCode(400, new Error { codigo = 400, mensaje = $"El nombre del producto({p.nombre}) ya existe, porfavor revisalo" });
                 }
                 else {
-                    if (p.precio == 0 || string.IsNullOrEmpty(p.categoria) || string.IsNullOrEmpty(p.descripcion))
+                    if (p.precio == "0" || string.IsNullOrEmpty(p.categoria) || string.IsNullOrEmpty(p.descripcion))
                     {
                         return StatusCode(400, new Error { codigo = 400, mensaje = $"Por favor revisa el valor de Precio({p.precio}), Categoria({p.categoria}), Descripcion({p.descripcion}) estos no pueden ir vacios o en 0" });
                     }

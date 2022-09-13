@@ -1,7 +1,75 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-10 py-5">
-      
+      <div class="row">
+        <div class="alert alert-danger" role="alert" *ngIf="errorSave != undefined">
+          {{errorSave.mensaje}}
+        </div>
+        <div class="col-12">
+          <div class="row">
+            <div class="mb-3 col-6">
+              <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+              <input type="text" [(ngModel)]="nuevo.nombre" class="form-control" id="exampleFormControlInput1" placeholder="">
+            </div>
+            <div class="mb-3 col-6">
+              <label for="exampleFormControlInput1" class="form-label">Categoria</label>
+              <input type="text" [(ngModel)]="nuevo.categoria" class="form-control" id="exampleFormControlInput1" placeholder="">
+            </div>
+            <div class="mb-3 col-12">
+              <label for="exampleFormControlInput1" class="form-label">Descripcion</label>
+              <input type="text" [(ngModel)]="nuevo.descripcion" class="form-control" id="exampleFormControlInput1" placeholder="">
+            </div>
+            <div class="mb-3 col-6">
+              <label for="exampleFormControlInput1" class="form-label">Cantidad</label>
+              <input type="text" [(ngModel)]="nuevo.unidades" class="form-control" id="exampleFormControlInput1" placeholder="">
+            </div>
+            <div class="mb-3 col-6">
+              <label for="exampleFormControlInput1" class="form-label">Precio</label>
+              <input type="text" [(ngModel)]="nuevo.precio"class="form-control" id="exampleFormControlInput1" placeholder="">
+            </div>
+            <div class="col-12 ">
+             <div class="row justify-content-end">
+              <button type="button " class="btn btn-primary col-3" *ngIf="actualizar.id == 0" (click)="add()">Crear</button>
+              <button type="button " class="btn btn-success col-3" *ngIf="actualizar.id != 0" (click)="update()">Actualizar</button>
+              <button type="button " class="btn btn-secondary col-3" (click)="cancelar()">Cancelar</button>
+             </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 py-5">
+          <div class="alert alert-warning" *ngIf="errorList != undefined" role="alert">
+            {{errorList.mensaje}}
+          </div>
+          <table class="table" *ngIf="errorList == undefined">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Descriopcion</th>
+                <th scope="col">Cantidada</th>
+                <th scope="col">Precio</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let i of productosList">
+                <th scope="row">{{i.id}}</th>
+                <td>{{i.nombre}}</td>
+                <td>{{i.categoria}}</td>
+                <td>{{i.descripcion}}</td>
+                <td>{{i.unidades}}</td>
+                <td>{{i.precio}}</td>
+                <td>
+                  <button type="button " class="btn btn-warning col-3" (click)="edit(i)">Editar</button>
+                  <button type="button " class="btn btn-danger col-3" (click)="delete(i.id)">Borrar</button>
+                </td>
+              </tr>              
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
